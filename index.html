@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <h1 id="city">City</h1>
+    <h2 id="country">Country</h2>
+    <h2 id="temperature">Current temperature</h2>
+    <h3>Feels like <span id="temperature_feels_like"></span></h3>
+    <h3>Pressure <span id="pressure"></span> mb</h3>
+    <h3>Humidity <span id="humidity"></span>%</h3>
+    <input type="text">
+    <button id="search">Search</button>
+    <div id="airQuality">
+        <p>pm10 <span id="pm10"> </span></p>
+        <p>pm2 <span id="pm2"> </span></p>
+        <p>co <span id="co"> </span></p>
+        <p>no2 <span id="no2"> </span></p>
+        <p>o3 <span id="o3"> </span></p>
+        <p>so2 <span id="so2"> </span></p>
+
+    </div>
+    <div id="windData">
+        <p>Wind from <span id="wind_dir"></span> at <span id="wind_speed"></span> km/h</p>
+        <p>Gust at <span id="gust_speed"></span> km/h</p>
+        <p>UV index: <span id="uv"></span></p>
+    </div>
+Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>   
+<script src="script.js"></script>
+</body>
+</html>
