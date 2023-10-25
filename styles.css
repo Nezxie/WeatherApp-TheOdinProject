@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono&display=swap');
+:root{
+--bg-color:#FFEECC;
+--bg-img: url('img/hotNight.jpeg');
+}
+
+body{
+    --margins: 50px;
+    --innerMargins: 50px;
+    margin:0;
+    font-family: 'Sometype Mono', monospace;
+    font-size: 18px;
+    color:#FFF;
+}
+@media screen and (max-width: 900px) {
+    body {
+        font-size: 14px;
+        --margins: 0px;
+        --innerMargins:20px;    
+    }
+}
+input,
+button{
+    font-family: 'Sometype Mono', monospace;
+    font-size: 1em;
+}
+h1{
+    font-size: 2.8em;
+}
+h2{
+    font-size: 1.4em;
+}
+h3{
+    font-size: 1.2em;
+}
+.wrapper{
+    background-color: var(--bg-color);
+    background-image:var(--bg-img);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 3fr 3fr 1fr 3fr 3fr 3fr;
+}
+
+.location,
+.search-bar,
+.more-info
+{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-left:var(--margins);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+#airQuality,
+#windData{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    margin-right:var(--margins);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+.location{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border-radius: 0.5em 0.5em 0 0;
+}
+.search-bar{
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+.more-info{
+    grid-row-start: 4;
+    grid-row-end: 5;
+    border-radius: 0 0 0.5em 0.5em;
+}
+
+#airQuality{
+    grid-row-start: 4;
+    grid-row-end: 5;
+    border-radius: 0.5em;
+}
+#windData{
+    margin-top:var(--innerMargins);
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border-radius: 0.5em;
+}
+.forecast{
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    margin-top: var(--innerMargins);
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 50px 0px;
+}
+
+@media screen and (max-width: 1600px) {
+    .wrapper{
+        grid-template-columns: 1fr .5fr 1fr;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .wrapper{
+        grid-template-columns: 1fr .2fr 1fr;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .wrapper{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.5fr 3fr 0.5fr 3fr 3fr 3fr;
+    }
+    #airQuality,
+    #windData{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    border-radius: 0;
+
+  }
+  #airQuality{
+    grid-row-start: 6;
+    grid-row-end: 7;
+    margin-top: 20px;
+  }
+  #windData{
+    grid-row-start: 7;
+    grid-row-end: 8;
+    margin-top: 0px;
+  }
+  .location{
+    border-radius: 0;
+  }
+  .more-info{
+    border-radius: 0;
+  }
+}

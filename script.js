@@ -1,4 +1,4 @@
-const API_KEY = '' 
+const API_KEY = '4f2f9814c28b4036ad500721230204' 
 function processWeatherData(data){
     let formattedData = {
         'locationData':{
@@ -57,8 +57,58 @@ async function fetchLocations(query){
     }
     }
 }
+function isHot(temp){
+    temp = temp.slice(0, -1); 
+    if(temp < 15){
+        return false;
+    }
+    return true;
+}
 
+function changeBackground(isDay, isHot){
+    const colors = {
+        night:{
+            cold:'#00214F',
+            hot:'#4F092C',
+        },
+        day:{
+            cold:'#CCE1FF',
+            hot:'#FFEECC',
+        }
+    }
+    const img = {
+        night:{
+            cold:'img/hotNight.jpeg',
+            hot:'img/hotNight.jpeg',
+        },
+        day:{
+            cold:'#CCE1FF',
+            hot:'#FFEECC',
+        }
+    }
+    let currentColor;
+    let currenImg;
+    if(!isDay){
+        currentColor=colors.night
+        currenImg=img.night
+    }
+    else{
+        currentColor=colors.day
+        currenImg=img.day
+    }
+    if(isHot){
+        currentColor=currentColor.hot
+        currenImg=currenImg.hot
+    }
+    else{
+        currentColor=currentColor.cold
+        currenImg=currenImg.cold
+    }
+    document.documentElement.style.setProperty('--bg-color', currentColor);
+    document.documentElement.style.setProperty('--bg-img', `url('${currenImg}')`);
+}
 function updateUI(data){
+    changeBackground(data.is_day,isHot(data.weatherData.tempC));
     ui.city.innerText = data.locationData.city ;
     ui.country.innerText = data.locationData.country ;
 
