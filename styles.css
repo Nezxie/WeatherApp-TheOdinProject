@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sometype+Mono&display=swap');
 :root{
 --bg-color:#FFEECC;
---bg-img: url('img/hotNight.jpeg');
+--bg-img: url('img/hotday.png');
 }
 
 body{
@@ -39,6 +39,10 @@ h3{
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
     grid-template-rows: 3fr 3fr 1fr 3fr 3fr 3fr;
+    height: 100vh;
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
 }
 
 .location,
@@ -49,7 +53,7 @@ h3{
     grid-column-end: 2;
     margin-left:var(--margins);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 #airQuality,
@@ -58,7 +62,7 @@ h3{
     grid-column-end: 4;
     margin-right:var(--margins);
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.75);
 }
 .location{
     grid-row-start: 2;
@@ -111,6 +115,7 @@ h3{
     .wrapper{
         grid-template-columns: 1fr;
         grid-template-rows: 0.5fr 3fr 0.5fr 3fr 3fr 3fr;
+        height:auto;
     }
     #airQuality,
     #windData{

@@ -78,12 +78,12 @@ function changeBackground(isDay, isHot){
     }
     const img = {
         night:{
-            cold:'img/hotNight.jpeg',
-            hot:'img/hotNight.jpeg',
+            cold:'img/coldnight.png',
+            hot:'img/hotnight.png',
         },
         day:{
-            cold:'#CCE1FF',
-            hot:'#FFEECC',
+            cold:'img/coldday.png',
+            hot:'img/hotday.png',
         }
     }
     let currentColor;
