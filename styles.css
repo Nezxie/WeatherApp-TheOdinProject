@@ -26,23 +26,33 @@ button{
 }
 h1{
     font-size: 2.8em;
+    margin:1rem;
 }
 h2{
     font-size: 1.4em;
+    margin:1rem;
+
 }
 h3{
     font-size: 1.2em;
+    margin:1rem;
+
+}
+p{
+    margin:10px;
 }
 .wrapper{
     background-color: var(--bg-color);
     background-image:var(--bg-img);
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
-    grid-template-rows: 3fr 3fr 1fr 3fr 3fr 3fr;
-    height: 100vh;
+    grid-template-rows: 30px min-content min-content min-content min-content 30px;
+    align-content: center;
     background-position: center;
     background-repeat: repeat-y;
     background-size: cover;
+    min-height: 100vh;
+    height: auto;
 }
 
 .location,
@@ -54,6 +64,7 @@ h3{
     margin-left:var(--margins);
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.75);
+    
 }
 
 #airQuality,
@@ -63,41 +74,64 @@ h3{
     margin-right:var(--margins);
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
 }
 .location{
     grid-row-start: 2;
     grid-row-end: 3;
     border-radius: 0.5em 0.5em 0 0;
+    align-self: self-end;
 }
 .search-bar{
     grid-row-start: 3;
     grid-row-end: 4;
+    align-self: center;
 }
 .more-info{
     grid-row-start: 4;
     grid-row-end: 5;
     border-radius: 0 0 0.5em 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: self-start;
 }
 
 #airQuality{
     grid-row-start: 4;
     grid-row-end: 5;
     border-radius: 0.5em;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 #windData{
     margin-top:var(--innerMargins);
     grid-row-start: 2;
     grid-row-end: 3;
     border-radius: 0.5em;
+    align-self: self-end;
 }
 .forecast{
+    min-height: 275px;
     grid-row-start: 5;
     grid-row-end: 6;
     grid-column-start: 1;
     grid-column-end: 4;
     margin-top: var(--innerMargins);
     background-color: rgba(0, 0, 0, 0.65);
-    padding: 50px 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.forecast-temperature-mini{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media screen and (max-width: 1600px) {
@@ -116,6 +150,7 @@ h3{
         grid-template-columns: 1fr;
         grid-template-rows: 0.5fr 3fr 0.5fr 3fr 3fr 3fr;
         height:auto;
+        background-position: right;
     }
     #airQuality,
     #windData{
