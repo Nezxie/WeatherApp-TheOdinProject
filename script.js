@@ -80,7 +80,7 @@ function dataProcessing(){
 function Fetching(processing){
     async function fetchCurrentData(location){
        try{
-            let response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=yes`, {mode: 'cors'});
+            let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=yes`, {mode: 'cors'});
             let data = await response.json();
             data = processing.processWeatherData(data);
             return data;
@@ -90,7 +90,7 @@ function Fetching(processing){
     }
     async function fetchForecast(location,isHourly){
         try{
-             let response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3&aqi=yes`, {mode: 'cors'});
+             let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3&aqi=yes`, {mode: 'cors'});
              let data = await response.json();
              data = processing.processForecast(data,isHourly);
              return data;
@@ -102,7 +102,7 @@ function Fetching(processing){
     async function fetchLocations(query){
         if(query.length > 2){
             try{
-                let response = await fetch(`http://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${query}`, {mode: 'cors'});
+                let response = await fetch(`https://api.weatherapi.com/v1/search.json?key=${API_KEY}&q=${query}`, {mode: 'cors'});
                 let data = await response.json();
                 console.log(data);
         }catch(err){
@@ -280,7 +280,7 @@ function Ui(fetching){
                 let description = document.createElement('p');
                 let icon = document.createElement('img');
                 dateText.innerText = day.date.toLocaleDateString("en-GB", { day: 'numeric', month: 'long', year: 'numeric' });
-                icon.src = 'http:'+ day.icon;
+                icon.src = 'https:'+ day.icon;
                 description.innerText = day.description;
                 maxTemp.innerText = day.maxTemp + '°C';
                 minTemp.innerText = day.minTemp + '°C';
