@@ -128,10 +128,19 @@ p{
     align-items: center;
 
 }
+
 .forecast-temperature-mini{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.loader{
+    transition: .75s;
+    opacity:100%;
+    position: absolute;
+}
+.smooth-hide{
+    opacity:0%;
 }
 
 @media screen and (max-width: 1600px) {
@@ -174,5 +183,18 @@ p{
   }
   .more-info{
     border-radius: 0;
+  }
+  .forecast{
+    align-items: stretch;
+  }
+  .forecast-element{
+    width:30%;
+    background-color: rgba(0,0,0,0.5);
+    margin:20px 5px;
+    border-radius: 0.5em;
+  }
+  .forecast-temperature-mini>img{
+    width:10vw;
+    max-width: 64px;
   }
 }

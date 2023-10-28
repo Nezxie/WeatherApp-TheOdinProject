@@ -106,10 +106,11 @@ function Fetching(processing){
                 let data = await response.json();
                 console.log(data);
         }catch(err){
-            console.log(err);
+            console.error(err);
         }
         }
     }
+   
     return{fetchCurrentData,fetchForecast,fetchLocations,processing}
 }
 
@@ -137,14 +138,43 @@ function Ui(fetching){
             'uv':document.getElementById('uv'),
         }
     }
-
+    initUi();
     const button = document.getElementById('search');
     const input = document.querySelector('input');
-    input.addEventListener('keyup',()=>{fetching.fetchLocations(input.value)})
+    //input.addEventListener('keyup',()=>{fetching.fetchLocations(input.value)})
+    input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            updateUI(fetching.fetchCurrentData(input.value));
+            updateForecast(fetching.fetchForecast(input.value,isHourly()));
+        }
+    })
     button.addEventListener('click',()=>{
         updateUI(fetching.fetchCurrentData(input.value));
         updateForecast(fetching.fetchForecast(input.value,isHourly()));
     })
+
+    async function initUi(){     
+
+        const options = {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+        };
+
+        async function success(pos) {
+            const crd = pos.coords;
+            updateUI(await fetching.fetchCurrentData(crd.latitude+","+crd.longitude))
+            updateForecast(await fetching.fetchForecast(crd.latitude+","+crd.longitude))
+        }
+          
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+            updateUI(fetching.fetchCurrentData('London'));
+            updateForecast(fetching.fetchForecast('London'));
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+    }
 
     async function updateUI(inputData){
         let data = await inputData;
@@ -214,10 +244,14 @@ function Ui(fetching){
     }
     async function updateForecast(inputData){
         const forecastContainer = document.querySelector('.forecast');
+        const loader = document.querySelector('.loader');
+        loader.classList = 'loader';
+        document.querySelectorAll('.forecast-element').forEach(el => {
+            forecastContainer.removeChild(el)
+          })
         let data = await inputData;
         if(isHourly()){
             for(let i=0;i<23;i++){
-                console.log(data.hourlyData[i].time, typeof data.hourlyData[i].time)
                 let dateText = document.createElement('p');
                 let timeText = document.createElement('p');
                 let tempText = document.createElement('p');
@@ -267,10 +301,10 @@ function Ui(fetching){
                 elementContainer.appendChild(temperatureIconContainer);
                 elementContainer.appendChild(description);
                 elementContainer.appendChild(chanceOfRain);
-
                 forecastContainer.appendChild(elementContainer);
             }
-        } 
+        }
+        loader.classList += ' smooth-hide'; 
     }
     function isHourly(){
         //check from ui if checkbox or sth
@@ -284,27 +318,12 @@ function Ui(fetching){
 const process = dataProcessing();
 const fetching = Fetching(process);
 const ui = Ui(fetching);
-//check user location ui.updateUI(fetchCurrentData(userLocation))
-
 
 /* TO DO
-display all current data on screen 
-    -city ✔️
-    -temperature ✔️ 
-    -pressure ✔️
-    -humidity ✔️
-    -air quality ✔️
-add popup for city search (when typing)
-style
-    -change background img if day/night ✔️
-    -add btn to switch F to C (meeh)
-    -minimalistic icons
-
-add future 3day forecast - function to fetch and display
-    -temperature only (day/night if possible)
-add moon phases for today
-add special "wind tab" for outdoorsy guys (how to style?) ✔️ 
-fetch user ip and display forecast based on that or add "Localize me" btn
-
-
+* add popup for city search suggestions (when typing)
+* 3 days to hourly forecast switch:
+    - a button/checkbox to do that
+    - styling and pagination so there is no more than 5 flex items at a time
+    - arrows to scroll pages
+* maybe animated loaders for every box
 */
