@@ -3,36 +3,37 @@ const API_KEY = '4f2f9814c28b4036ad500721230204'
 function dataProcessing(){
 
     function processWeatherData(data){
+        const undefinedFallback = "unknown";
         let formattedData = {
             'locationData':{
-                'country':data.location.country,
-                'city':data.location.name
+                'country':data.location.country||undefinedFallback,
+                'city':data.location.name||undefinedFallback
             },
-            'time':data.location.localtime,
+            'time':data.location.localtime||"",
             'weatherData':{
-                'name':data.current.condition.text,
-                'tempC':data.current.temp_c + "℃",
-                'tempF':data.current.temp_f + '℉',
-                'feelsLikeC':data.current.feelslike_c + "℃",
-                'feelsLikeF':data.current.feelslike_f + '℉',
-                'pressure':data.current.pressure_mb,
-                'humidity':data.current.humidity,
+                'name':data.current.condition.text||undefinedFallback,
+                'tempC':data.current.temp_c + "℃"||undefinedFallback,
+                'tempF':data.current.temp_f + '℉'||undefinedFallback,
+                'feelsLikeC':data.current.feelslike_c + "℃"||undefinedFallback,
+                'feelsLikeF':data.current.feelslike_f + '℉'||undefinedFallback,
+                'pressure':data.current.pressure_mb||undefinedFallback,
+                'humidity':data.current.humidity||undefinedFallback,
             },
             'airQuality':{
-                'co':data.current.air_quality.co.toFixed(2),
-                'no2':data.current.air_quality.no2.toFixed(2),
-                'o3':data.current.air_quality.o3.toFixed(2),
-                'pm10':data.current.air_quality.pm10.toFixed(2),
-                'pm2':data.current.air_quality.pm2_5.toFixed(2),
-                'so2':data.current.air_quality.so2.toFixed(2),
+                'co':data.current.air_quality.co? data.current.air_quality.co.toFixed(2):undefinedFallback,
+                'no2':data.current.air_quality.no2? data.current.air_quality.no2.toFixed(2):undefinedFallback,
+                'o3':data.current.air_quality.o3? data.current.air_quality.o3.toFixed(2):undefinedFallback,
+                'pm10':data.current.air_quality.pm10? data.current.air_quality.pm10.toFixed(2):undefinedFallback,
+                'pm2':data.current.air_quality.pm2_5? data.current.air_quality.pm2_5.toFixed(2):undefinedFallback,
+                'so2':data.current.air_quality.so2? data.current.air_quality.so2.toFixed(2):undefinedFallback,
             },
-            'is_day':data.current.is_day,
+            'is_day':(data.current.is_day === 0 || data.current.is_day === 1) ? data.current.is_day:1,
             'wind':{
-              'wind':data.current.wind_kph,  
-              'wind_dir':data.current.wind_dir, 
-              'wind_degree':data.current.wind_degree, 
-              'gust_kph':data.current.gust_kph, 
-              'uv':data.current.uv, 
+              'wind':data.current.wind_kph || undefinedFallback,  
+              'wind_dir':data.current.wind_dir ||undefinedFallback, 
+              'wind_degree':data.current.wind_degree || undefinedFallback, 
+              'gust_kph':data.current.gust_kph || undefinedFallback, 
+              'uv':data.current.uv || undefinedFallback, 
             }
         }
         return formattedData
